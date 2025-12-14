@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Number System Converter</title>
+<link rel="stylesheet " href="style.css">
+</head>
+<body>
+<div class="container">
+<h1>Number System Converter</h1>
+
+
+<label for="numberInput">Enter Number</label>
+<input type="text" id="numberInput" placeholder="e.g. 1010" /><br><br>
+
+
+<label for="fromBase">From</label>
+<select id="fromBase">
+<option value="2">Binary</option>
+<option value="8">Octal</option>
+<option value="10" selected>Decimal</option>
+<option value="16">Hexadecimal</option>
+</select>
+<br><br>
+
+
+<label for="toBase">To</label>
+<select id="toBase">
+<option value="2">Binary</option>
+<option value="8">Octal</option>
+<option value="10">Decimal</option>
+<option value="16">Hexadecimal</option>
+</select>
+<br><br>
+
+
+<button onclick="convertNumber()">Convert</button>
+
+
+<button onclick="swapBases()">Swap</button>
+
+
+<div class="result" id="result">Result will appear here:</div>
+
+
+</div>
+
+
+<script>
+function convertNumber() {
+const input = document.getElementById('numberInput').value.trim();
+const fromBase = parseInt(document.getElementById('fromBase').value);
+const toBase = parseInt(document.getElementById('toBase').value);
+const resultDiv = document.getElementById('result');
+
+
+if (input === '') {
+resultDiv.textContent = 'Please enter a number.';
+return;
+}
+
+
+const decimalValue = parseInt(input, fromBase);
+if (isNaN(decimalValue)) {
+resultDiv.textContent = 'Invalid number for the selected base.';
+return;
+}
+
+
+const converted = decimalValue.toString(toBase).toUpperCase();
+resultDiv.textContent = 'Converted Result: ' + converted;
+}
+
+
+function swapBases() {
+const fromSelect = document.getElementById('fromBase');
+const toSelect = document.getElementById('toBase');
+
+
+const temp = fromSelect.value;
+fromSelect.value = toSelect.value;
+toSelect.value = temp;
+
+
+document.getElementById('result').textContent = 'Bases swapped. Click Convert.';
+}
+</script>
+</body>
+</html>
